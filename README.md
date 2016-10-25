@@ -1,3 +1,3 @@
 # Dictionary
 Implementing a dictionary using trie
-I have created the data structure. The program is perfectly working with user input. But it gives segmentation fault when using file.
+I have created the data structure. The program now takes proper input from the file. Correctly checks whether the word is present or not.
