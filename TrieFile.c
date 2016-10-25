@@ -22,47 +22,49 @@ bool isPresent(Node*, char[]);
 int main()
 {
 	char* str = NULL;
-	char st[50];
+	char st[100];
 	int i,j,size;
 	Node* trie  = getNode();
 
 	printf("Loading the words\n");
 
-	FILE* fp = fopen("large","r");
+	FILE* fp = fopen("/home/Faraz/Desktop/C C++ Programs/dict.txt","r");
     if(fp == NULL)
     {
     	printf("NULL\n");
-        return 0;
     }
-        printf("Entering the loop\n");  
-    while(!feof(fp)) 
+    else
     {
-    	printf("Inside loop\n");
-    	fscanf(fp,"%s",str);
-    	printf("Read  %s\n",str);
-    	strcpy(st,str);
-        insert(trie,st);
-        printf("Inserted\n");
-        //fp=fp + strlen(str);
+    	printf("Entering the loop\n");  
+	    
+	    for(;;)
+	    {
+	    	if(fscanf(fp,"%s",st)!=1)
+	    	{
+	    		printf("End of line reached\n");
+	    		break;
+	    	}
+
+	    	printf("%s\n",st);
+	        insert(trie,st);
+	    }
+		bool res = FALSE;
+		char temp[50];
+		printf("Enter the number of searches\n");
+		scanf("%d",&size);
+		for(i = 0; i < size;i++)
+		{	
+			printf("The word to be searched\t");
+			scanf("%s",&temp);
+			res = isPresent(trie,temp);	
+			if(res)
+				printf("This word is present\n");
+			else
+				printf("This word is not present\n");
+		}
+
     }
-
-    printf("Loaded\n");
-
-	bool res = FALSE;
-	printf("Enter the number of searches\n");
-	scanf("%d",&size);
-	for(i = 0; i < size;i++)
-	{
-		printf("The word to be searched\t");
-		scanf("%s",&str);
-		res = isPresent(trie,str);	
-		if(res)
-			printf("This word is present\n");
-		else
-			printf("This word is not present\n");
-	}
 	return 0;
-
 }
 
 Node* getNode()
