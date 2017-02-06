@@ -24,21 +24,27 @@ int main()
 	char str[20];
 	int i,j,size;
 	Node* trie  = getNode();
+    char c;
 	printf("Enter the number of strings you want to enter\n");
 	scanf("%d",&size);
+    /* skip newline left by scanf */
+    while ((c = getchar()) != '\n' && c != EOF);
 	for(i = 0;i < size;i++)
 	{
-		printf("Enter the next word\n");
-		scanf("%s",str);
+		printf("Enter the next word %d\n", i);
+		fgets(str,sizeof(str), stdin);
+        printf("read value: %s\n", str);
 		insert(trie,str);
 	}
 	bool res = FALSE;
 	printf("Enter the number of searches\n");
 	scanf("%d",&size);
+    /* skip newline left by scanf */
+    while ((c = getchar()) != '\n' && c != EOF);
 	for(i = 0; i < size;i++)
 	{
 		printf("The word to be searched\t");
-		scanf("%s",&str);
+		fgets(str,sizeof(str), stdin);
 		res = isPresent(trie,str);	
 		if(res)
 			printf("This word is present\n");
